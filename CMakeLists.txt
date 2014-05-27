@@ -30,8 +30,13 @@ file(GLOB_RECURSE GUI_QRC  "ui/*.qrc")
 qt5_wrap_ui(GUI_H ${GUI_UI})
 qt5_add_resources(GUI_QRC ${GUI_QRC})
 # Tell CMake to create the helloworld executable
-add_executable(QGrabCut WIN32  ${DIR_SRCS} ${GUI_H} ${GUI_CPP} ${GUI_MOC} ${GUI_UI} ${GUI_QRC})
-
+if(APPLE)
+	add_executable(QGrabCut MACOSX_BUNDLE ${DIR_SRCS} ${GUI_H} ${GUI_CPP} ${GUI_MOC} ${GUI_UI} ${GUI_QRC})
+elseif(WIN32)
+	add_executable(QGrabCut WIN32  ${DIR_SRCS} ${GUI_H} ${GUI_CPP} ${GUI_MOC} ${GUI_UI} ${GUI_QRC})
+else()
+	add_executable(QGrabCut ${DIR_SRCS} ${GUI_H} ${GUI_CPP} ${GUI_MOC} ${GUI_UI} ${GUI_QRC})
+endif()
 # Use the Widgets module from Qt 5.
 target_link_libraries(QGrabCut Qt5::Widgets Qt5::Core Qt5::Gui)
 #message("${OpenCV_LIBS}")

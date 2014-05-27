@@ -1,0 +1,2 @@
+/Users/leon/Documents/QGrabCut/t_build/CMakeFiles/QGrabCut.dir
+/Users/leon/Documents/QGrabCut/t_build/CMakeFiles/QGrabCut_automoc.dir

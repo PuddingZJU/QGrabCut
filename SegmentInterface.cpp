@@ -26,8 +26,8 @@ namespace NMH {
 	void GrabCutSegmentor::segment(const cv::Mat &img, const cv::Mat &mask, cv::Mat &out_seg)
 	{
 		assert(mask.size() == img.size());
-		GrabCut grabcut(img.clone());
-
+        cv::Mat img_clone = img.clone();
+		GrabCut grabcut(img_clone);
 		cv::Mat &trimap = grabcut.get_trimap();
 		cv::Mat &segment = grabcut.get_segment();
 		trimap.setTo(cv::Scalar(TrimapUnknown));
@@ -102,7 +102,7 @@ namespace NMH {
 
 		Graph<double,double,double> graph(_image_size, 6 * _image_size, ErrorFunc);
 		graph.add_node(_image_size);
-		/// ��ֵ�ڱ�capacity
+		/// ∏≥÷µ¡⁄±ﬂcapacity
 		double _max_cap_boundary = 0.0;
 		double K = 0.0;
 		for (int y = 1; y < _image_height - 1; y++)
@@ -134,7 +134,7 @@ namespace NMH {
 		double _max_cap_source = -1.0e10;
 		double _min_cap_sink = 1.0e10;
 		double _max_cap_sink = -1.0e10;
-		/// ��ֵterminal edge
+		/// ∏≥÷µterminal edge
 		for (int y = 0; y < _image_height; y++)
 		{
 			for (int x = 0; x < _image_width; x++)
@@ -156,7 +156,7 @@ namespace NMH {
 				{
 					int inc = 0;
 					double tmp_ratio = bkg_hist[_image_intensity[node_id]]/(double)bkg_seed_sum;
-					/// Ѱ����ӽ���������Ϊ�������ֵ
+					/// —∞’“◊ÓΩ”Ω¸µƒ◊‹ ˝≤ªŒ™¡„µƒ¡¡∂»÷µ
 					while (tmp_ratio < FLOAT_ZERO && (++inc + _image_intensity[node_id]) < MAX_INTENSITY)
 					{
 						tmp_ratio = bkg_hist[_image_intensity[node_id] + inc]/(double)bkg_seed_sum;
@@ -266,7 +266,7 @@ namespace NMH {
 		int K = 2 * _image_size;
 		float cof = 0.95f;
 
-		/// ������˹��˹����
+		/// ¿≠∆’¿≠Àπ∏ﬂÀπÀ„◊”
 		LoG(LoG_result, _image_width, _image_height);
 
 		float max_log_value = -1.0f;
@@ -326,7 +326,7 @@ namespace NMH {
 #endif
 			}
 
-			/// ��Canny���߸�ʴ���Canny��Եǿ��LoG�߽磬������LoG�����ڲ��߽�
+			/// ”√CannyªÚ’ﬂ∏Ø ¥∫ÛµƒCanny±ﬂ‘µ«øªØLoG±ﬂΩÁ£¨≤¢œ˚≥˝LoG«¯”Úƒ⁄≤ø±ﬂΩÁ
 			for (int y = 0;y < _image_height; y++)
 			{
 				for (int x = 0; x < _image_width; x++)
@@ -335,21 +335,21 @@ namespace NMH {
 
 					if (param.canny_erode)
 					{
-						/// �ø�ʴ���Canny��ǿ��Ե
+						/// ”√∏Ø ¥∫ÛµƒCanny‘ˆ«ø±ﬂ‘µ
 						ptr = (unsigned char *)(edge_erode_img->imageData + y * edge_erode_img->widthStep + x);
 					}
 					else
 					{
-						/// ��ԭʼ��Canny��ǿ��Ե
+						/// ”√‘≠ ºµƒCanny‘ˆ«ø±ﬂ‘µ
 						ptr =  (unsigned char *)(edge_img->imageData + y * edge_img->widthStep + x);
 					}
 
-					/// ʹ��LoG�߽�ͬʱ��Canny��ǿ
+					///  π”√LoG±ﬂΩÁÕ¨ ±”√Canny‘ˆ«ø
 					if (!param.use_canny_input && param.use_canny_enhance)
 					{
 						if (*ptr == 0x00) LoG_result[y * _image_width + x] = 0;
 					}
-					/// ��ʹ��Canny�߽���Ϊ����
+					/// Ωˆ π”√Canny±ﬂΩÁ◊˜Œ™ ‰»Î
 					else
 					{
 						LoG_result[y * _image_width + x] = *ptr;
