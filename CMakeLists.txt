@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.11)
 
 project(QGrabCut)
 # Find the library
+SET(CMAKE_CXX_FLAGS "-std=c++11")
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5GUI REQUIRED)

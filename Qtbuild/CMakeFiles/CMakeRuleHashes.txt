@@ -1,5 +1,0 @@
-# Hashes of file build rules.
-74bee37097c5897555b8eb0e3542a596 CMakeFiles/QGrabCut_automoc
-8c6e7fd2e6f14243373283a40597d42b qrc_QGrabCut.cpp
-2e9e645b6782967907d94e84b185200b ui_ParamWidget.h
-907caedc79759e81b2f146ccc2f87334 ui_QGrabCut.h

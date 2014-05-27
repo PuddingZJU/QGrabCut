@@ -26,8 +26,8 @@ namespace NMH {
 	void GrabCutSegmentor::segment(const cv::Mat &img, const cv::Mat &mask, cv::Mat &out_seg)
 	{
 		assert(mask.size() == img.size());
-        cv::Mat img_clone = img.clone();
-		GrabCut grabcut(img_clone);
+        	//cv::Mat img_clone = img.clone();
+		GrabCut grabcut(img.clone());
 		cv::Mat &trimap = grabcut.get_trimap();
 		cv::Mat &segment = grabcut.get_segment();
 		trimap.setTo(cv::Scalar(TrimapUnknown));
