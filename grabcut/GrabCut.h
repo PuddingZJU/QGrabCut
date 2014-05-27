@@ -34,7 +34,7 @@ class GrabCut
 	friend class NMH::GrabCutSegmentor;
 
 public:
-	GrabCut(cv::Mat &img);
+	GrabCut(const cv::Mat &img);
 	~GrabCut();
 
 	void init(int min_x, int max_x, int min_y, int max_y);

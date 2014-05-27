@@ -11,7 +11,7 @@ int canny_max = 150;
 FILE *fp = NULL;
 #define MAX_RUN_TIMES 5
 
-GrabCut::GrabCut(Mat &img)
+GrabCut::GrabCut(const Mat &img)
 {
 	this->img = img;
 
